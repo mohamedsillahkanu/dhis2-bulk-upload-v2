@@ -3,52 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DHIS2 Bulk Dataset Upload — ICF-SL</title>
+<title>DHIS2 Bulk Upload — ICF-SL</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:500;min-height:100vh;}
 
-/* ── LOGIN ── */
+/* LOGIN */
 .login-screen{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;background:linear-gradient(135deg,#004080,#0066cc);}
 .login-card{background:#fff;border-radius:12px;padding:38px;max-width:460px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.25);border:4px double #004080;}
-.logo-center{display:flex;justify-content:center;margin-bottom:20px;}
+.lc-logo{display:flex;justify-content:center;margin-bottom:20px;}
 .logo-box{background:#f8f9fa;border-radius:8px;padding:10px;border:2px solid #004080;display:inline-block;}
 .logo-box img{width:90px;display:block;border-radius:5px;}
-.login-title{text-align:center;margin-bottom:26px;}
-.login-title h1{color:#004080;font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
-.login-title p{color:#666;font-size:12px;}
-.form-group{margin-bottom:16px;}
-.form-label{display:block;color:#004080;font-size:11px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
-.form-input{width:100%;padding:11px 14px;border:2px solid #004080;border-radius:6px;font-size:13px;font-family:'Oswald',sans-serif;font-weight:500;color:#000;background:#fff;transition:all .2s;}
-.form-input:focus{outline:none;border-color:#0056b3;box-shadow:0 0 0 3px rgba(0,64,128,.12);}
-.form-input::placeholder{color:#bbb;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.btn-connect{width:100%;padding:13px;background:#004080;color:#fff;border:2px solid #004080;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;font-family:'Oswald',sans-serif;transition:all .2s;margin-top:4px;}
-.btn-connect:hover{background:#0056b3;}
-.btn-connect:disabled{background:#6c757d;border-color:#6c757d;cursor:wait;}
+.lc-title{text-align:center;margin-bottom:26px;}
+.lc-title h1{color:#004080;font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
+.lc-title p{color:#666;font-size:12px;}
+.fg{margin-bottom:16px;}
+.fl{display:block;color:#004080;font-size:11px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.fi{width:100%;padding:11px 14px;border:2px solid #004080;border-radius:6px;font-size:13px;font-family:'Oswald',sans-serif;font-weight:500;color:#000;background:#fff;transition:all .2s;}
+.fi:focus{outline:none;border-color:#0056b3;box-shadow:0 0 0 3px rgba(0,64,128,.12);}
+.fi::placeholder{color:#bbb;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-login{width:100%;padding:13px;background:#004080;color:#fff;border:2px solid #004080;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;text-transform:uppercase;font-family:'Oswald',sans-serif;transition:all .2s;margin-top:4px;}
+.btn-login:hover{background:#0056b3;}
+.btn-login:disabled{background:#6c757d;border-color:#6c757d;cursor:wait;}
 
-/* ── MAIN ── */
-.main-content{display:none;padding:18px;}
-.main-content.active{display:block;}
-.page-container{max-width:1200px;margin:0 auto;}
+/* MAIN */
+.main{display:none;padding:18px;}
+.main.active{display:block;}
+.wrap{max-width:1200px;margin:0 auto;}
 
-.page-header{background:#004080;color:#fff;padding:22px 28px;text-align:center;border-radius:8px 8px 0 0;}
-.page-header .logo-box{background:#fff;border:none;}
-.page-header h3{font-size:12px;font-weight:700;letter-spacing:1px;margin:10px 0 3px;}
-.page-header .tag{font-size:10px;margin-bottom:10px;}
-.page-header h1{font-size:21px;font-weight:700;letter-spacing:1px;margin-bottom:5px;}
-.page-header .sub{font-size:12px;}
+/* HEADER */
+.page-hdr{background:#004080;color:#fff;padding:22px 28px;text-align:center;border-radius:8px 8px 0 0;}
+.page-hdr .logo-box{background:#fff;border:none;}
+.page-hdr h3{font-size:12px;font-weight:700;letter-spacing:1px;margin:10px 0 3px;}
+.page-hdr .tag{font-size:10px;margin-bottom:10px;font-style:italic;}
+.page-hdr h1{font-size:22px;font-weight:700;letter-spacing:1px;margin-bottom:5px;}
+.page-hdr .sub{font-size:12px;}
 
+/* CARD */
 .card{border:4px double #004080;border-top:none;border-radius:0 0 12px 12px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-bottom:14px;}
 .card-inner{padding:26px;}
 
-.sec-head{background:#004080;color:#fff;padding:12px 16px;margin-bottom:16px;border-radius:6px;display:flex;align-items:center;gap:11px;}
-.sec-icon{background:#fff;color:#004080;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
-.sec-title{font-size:14px;font-weight:700;letter-spacing:.5px;}
+/* SECTION HEADER */
+.sec-hdr{background:#004080;color:#fff;padding:12px 16px;margin-bottom:16px;border-radius:6px;display:flex;align-items:center;gap:11px;}
+.sec-num{background:#fff;color:#004080;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+.sec-ttl{font-size:14px;font-weight:700;letter-spacing:.5px;}
 
-/* ── TABS ── */
+/* TABS */
 .tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;}
 .tab{padding:9px 16px;background:#e9ecef;border:2px solid #dee2e6;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;font-family:'Oswald',sans-serif;color:#888;display:flex;align-items:center;gap:6px;transition:all .2s;}
 .tab.active{background:#004080;color:#fff;border-color:#004080;}
@@ -58,14 +61,14 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
 .panel{display:none;}
 .panel.active{display:block;}
 
-/* ── CONFIG GRID ── */
+/* CONFIG GRID */
 .cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
 .cfg-box{background:#f8f9fa;border:2px solid #004080;border-radius:8px;padding:16px;}
 .cfg-box label{display:block;color:#004080;font-size:11px;font-weight:700;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px;}
 .cfg-box select{width:100%;padding:10px 12px;border:2px solid #004080;border-radius:6px;font-size:13px;font-family:'Oswald',sans-serif;font-weight:500;}
-.hint{font-size:11px;color:#666;margin-top:6px;line-height:1.5;}
+.cfg-hint{font-size:11px;color:#666;margin-top:6px;line-height:1.5;}
 
-/* ── STATS ── */
+/* STATS */
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
 .stat{flex:1;min-width:110px;background:#f8f9fa;border:2px solid #dee2e6;border-radius:8px;padding:12px;text-align:center;}
 .stat.blue{border-color:#004080;background:#e7f3ff;}
@@ -78,59 +81,55 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
 .stat.gold .stat-n{color:#856404;}
 .stat-l{font-size:10px;color:#666;margin-top:4px;text-transform:uppercase;letter-spacing:.4px;}
 
-/* ── DROP ZONE ── */
-.dz{border:3px dashed #004080;border-radius:10px;padding:40px 22px;text-align:center;background:#f0f7ff;cursor:pointer;transition:all .25s;position:relative;}
+/* DROP ZONE */
+.dz{border:3px dashed #004080;border-radius:10px;padding:42px 22px;text-align:center;background:#f0f7ff;cursor:pointer;transition:all .25s;position:relative;}
 .dz:hover,.dz.over{background:#d9ecff;}
 .dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.dz-icon{font-size:48px;margin-bottom:10px;}
-.dz-title{font-size:17px;font-weight:700;color:#004080;margin-bottom:5px;}
+.dz-ico{font-size:52px;margin-bottom:10px;}
+.dz-ttl{font-size:18px;font-weight:700;color:#004080;margin-bottom:6px;}
 .dz-sub{font-size:12px;color:#777;}
 .file-badge{display:inline-flex;align-items:center;gap:10px;background:#d4edda;border:2px solid #28a745;border-radius:8px;padding:9px 16px;margin-top:13px;font-size:13px;font-weight:600;color:#155724;}
 .rm-btn{background:#dc3545;color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
-/* ── INFO BOXES ── */
-.info{padding:10px 15px;border-radius:6px;margin:10px 0;font-size:12px;line-height:1.6;}
-.info.blue{background:#e7f3ff;border:2px solid #004080;color:#004080;}
-.info.green{background:#d4edda;border:2px solid #28a745;color:#155724;}
-.info.yellow{background:#fff3cd;border:2px solid #ffc107;color:#856404;}
-.info.red{background:#f8d7da;border:2px solid #dc3545;color:#721c24;}
+/* INFO BOXES */
+.info-box{padding:11px 16px;border-radius:6px;margin:10px 0;font-size:12px;line-height:1.7;}
+.info-box.blue{background:#e7f3ff;border:2px solid #004080;color:#004080;}
+.info-box.green{background:#d4edda;border:2px solid #28a745;color:#155724;}
+.info-box.yellow{background:#fff3cd;border:2px solid #ffc107;color:#856404;}
+.info-box.red{background:#f8d7da;border:2px solid #dc3545;color:#721c24;}
 
-/* ── TABLES ── */
-.mtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
-.mtable th{background:#004080;color:#fff;padding:9px 12px;text-align:left;font-weight:600;}
-.mtable td{padding:7px 12px;border-bottom:1px solid #e9ecef;}
-.mtable tr:hover td{background:#e7f3ff;}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
+/* TABLES */
+.tbl-wrap{overflow-x:auto;max-height:260px;overflow-y:auto;border:2px solid #004080;border-radius:8px;margin:10px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.tbl th{background:#004080;color:#fff;padding:9px 12px;text-align:left;position:sticky;top:0;font-weight:600;white-space:nowrap;}
+.tbl td{padding:7px 12px;border-bottom:1px solid #e9ecef;white-space:nowrap;}
+.tbl tr:nth-child(even) td{background:#f8f9fa;}
+.tbl tr:hover td{background:#e7f3ff;}
+.badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700;}
 .badge.ok{background:#28a745;color:#fff;}
 .badge.skip{background:#aaa;color:#fff;}
 .badge.warn{background:#ffc107;color:#000;}
+.val-ok{color:#155724;font-weight:600;}
+.val-empty{color:#ccc;}
 
-.ptable-wrap{overflow-x:auto;max-height:300px;overflow-y:auto;border:2px solid #004080;border-radius:8px;margin:12px 0;}
-.ptable{width:100%;border-collapse:collapse;font-size:12px;}
-.ptable th{background:#004080;color:#fff;padding:9px 12px;text-align:left;position:sticky;top:0;white-space:nowrap;}
-.ptable td{padding:7px 11px;border-bottom:1px solid #e9ecef;white-space:nowrap;}
-.ptable tr:nth-child(even) td{background:#f8f9fa;}
-.ptable tr:hover td{background:#e7f3ff;}
-.cv{color:#155724;font-weight:600;}
-.ce{color:#ccc;}
-
-/* ── PROGRESS ── */
-.prog-sec{display:none;background:#f8f9fa;border:2px solid #004080;border-radius:8px;padding:16px;margin:16px 0;}
-.prog-sec.active{display:block;}
+/* PROGRESS */
+.prog-wrap{display:none;background:#f8f9fa;border:2px solid #004080;border-radius:8px;padding:16px;margin:16px 0;}
+.prog-wrap.active{display:block;}
+.prog-top{display:flex;justify-content:space-between;margin-bottom:4px;}
 .prog-bar{height:26px;background:#e9ecef;border-radius:6px;overflow:hidden;border:2px solid #004080;margin:8px 0;}
 .prog-fill{height:100%;background:linear-gradient(90deg,#004080,#0066cc);transition:width .3s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;min-width:35px;}
 .log-box{margin-top:12px;max-height:230px;overflow-y:auto;background:#1a1a2e;border-radius:6px;padding:12px 14px;font-family:'Courier New',monospace;font-size:12px;}
-.le{padding:3px 0;}
-.le.info{color:#17a2b8;}
-.le.success{color:#28a745;}
-.le.error{color:#dc3545;}
-.le.warning{color:#ffc107;}
+.log-line{padding:3px 0;}
+.log-line.info{color:#17a2b8;}
+.log-line.success{color:#28a745;}
+.log-line.error{color:#dc3545;}
+.log-line.warning{color:#ffc107;}
 
-/* ── BUTTONS ── */
+/* BUTTONS */
 .btn{padding:11px 22px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;transition:all .2s;border:2px solid;}
-.btn-primary{background:#004080;color:#fff;border-color:#004080;}
-.btn-primary:hover{background:#0056b3;}
-.btn-primary:disabled{background:#6c757d;border-color:#6c757d;cursor:wait;}
+.btn-blue{background:#004080;color:#fff;border-color:#004080;}
+.btn-blue:hover{background:#0056b3;}
+.btn-blue:disabled{background:#6c757d;border-color:#6c757d;cursor:wait;}
 .btn-gold{background:#ffc107;color:#000;border-color:#ffc107;}
 .btn-gold:hover{background:#e0a800;}
 .btn-gold:disabled{background:#e9ecef;color:#888;border-color:#ccc;cursor:wait;}
@@ -139,24 +138,24 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
 .btn-green:disabled{background:#6c757d;border-color:#6c757d;cursor:wait;}
 .btn-outline{background:#fff;color:#004080;border-color:#004080;}
 .btn-outline:hover{background:#004080;color:#fff;}
-.btn-red{background:#fff;color:#dc3545;border-color:#dc3545;}
-.btn-red:hover{background:#dc3545;color:#fff;}
-.btn-lg{padding:14px 40px;font-size:15px;}
+.btn-outline-red{background:#fff;color:#dc3545;border-color:#dc3545;}
+.btn-outline-red:hover{background:#dc3545;color:#fff;}
+.btn-lg{padding:14px 44px;font-size:15px;}
 .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
 
-/* ── TOGGLE ── */
-.tog{display:flex;align-items:center;gap:9px;padding:7px 0;}
-.tog input[type=checkbox]{width:17px;height:17px;accent-color:#004080;cursor:pointer;}
-.tog label{font-size:13px;cursor:pointer;}
+/* TOGGLE */
+.tog-row{display:flex;align-items:center;gap:9px;padding:7px 0;}
+.tog-row input[type=checkbox]{width:17px;height:17px;accent-color:#004080;cursor:pointer;}
+.tog-row label{font-size:13px;cursor:pointer;}
 
-/* ── NOTIFICATION ── */
-.notif{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:8px;font-weight:600;z-index:3000;display:none;box-shadow:0 4px 14px rgba(0,0,0,.2);min-width:250px;text-align:center;font-size:13px;}
+/* NOTIFICATION */
+.notif{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:8px;font-weight:600;z-index:9999;display:none;box-shadow:0 4px 14px rgba(0,0,0,.2);min-width:250px;text-align:center;font-size:13px;}
 .notif.success{background:#d4edda;color:#155724;border:2px solid #28a745;display:block;}
 .notif.error{background:#f8d7da;color:#721c24;border:2px solid #dc3545;display:block;}
 .notif.info{background:#e7f3ff;color:#004080;border:2px solid #004080;display:block;}
 .notif.warning{background:#fff3cd;color:#856404;border:2px solid #ffc107;display:block;}
 
-/* ── FOOTER ── */
+/* FOOTER */
 .footer{background:#004080;color:#fff;padding:16px;text-align:center;font-size:12px;line-height:1.8;border-radius:0 0 8px 8px;}
 
 ::-webkit-scrollbar{width:7px;height:7px;}
@@ -164,222 +163,253 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
 ::-webkit-scrollbar-track{background:#f0f4f8;}
 
 @media(max-width:700px){
-  .cfg-grid{grid-template-columns:1fr;}
-  .form-row{grid-template-columns:1fr;}
+  .cfg-grid,.fr{grid-template-columns:1fr;}
   .stats{gap:6px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════ LOGIN ══════════ -->
+<!-- ══════ LOGIN ══════ -->
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
-    <div class="logo-center">
+    <div class="lc-logo">
       <div class="logo-box">
         <img src="https://github.com/mohamedsillahkanu/gdp-dashboard-2/raw/6c7463b0d5c3be150aafae695a4bcbbd8aeb1499/ICF-SL.jpg" alt="ICF-SL">
       </div>
     </div>
-    <div class="login-title">
+    <div class="lc-title">
       <h1>DHIS2 BULK DATASET UPLOAD</h1>
-      <p>ICF-SL · Upload Excel data directly into DHIS2</p>
+      <p>ICF-SL · Push Excel data directly into DHIS2</p>
     </div>
     <form id="loginForm">
-      <div class="form-group">
-        <label class="form-label">DHIS2 Instance URL</label>
-        <input type="url" class="form-input" id="instanceUrl" placeholder="https://sl.dhis2.org/hmis23" required>
+      <div class="fg">
+        <label class="fl">DHIS2 Instance URL</label>
+        <input type="url" class="fi" id="instanceUrl" placeholder="https://sl.dhis2.org/hmis23" required>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Username</label>
-          <input type="text" class="form-input" id="username" placeholder="admin" required autocomplete="username">
+      <div class="fr">
+        <div class="fg">
+          <label class="fl">Username</label>
+          <input type="text" class="fi" id="username" placeholder="admin" required>
         </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" id="password" placeholder="••••••••" required autocomplete="current-password">
+        <div class="fg">
+          <label class="fl">Password</label>
+          <input type="password" class="fi" id="password" placeholder="••••••••" required>
         </div>
       </div>
-      <button type="submit" class="btn-connect" id="connectBtn">🔗 Connect to DHIS2</button>
+      <button type="submit" class="btn-login" id="loginBtn">🔗 Connect to DHIS2</button>
     </form>
   </div>
 </div>
 
-<!-- ══════════ MAIN ══════════ -->
-<div class="main-content" id="mainContent">
-  <div class="page-container">
+<!-- ══════ MAIN ══════ -->
+<div class="main" id="mainDiv">
+  <div class="wrap">
 
-    <div class="page-header">
-      <div class="logo-center">
+    <div class="page-hdr">
+      <div class="lc-logo">
         <div class="logo-box">
           <img src="https://github.com/mohamedsillahkanu/gdp-dashboard-2/raw/6c7463b0d5c3be150aafae695a4bcbbd8aeb1499/ICF-SL.jpg" style="width:80px;">
         </div>
       </div>
       <h3>Informatics Consultancy Firm-Sierra Leone (ICF-SL)</h3>
-      <p class="tag"><em>Driving Data-Driven Solutions for Health and Development</em></p>
+      <p class="tag">Driving Data-Driven Solutions for Health and Development</p>
       <h1>📤 DHIS2 BULK DATASET UPLOAD</h1>
-      <p class="sub">Select dataset · Upload Excel · Auto-match · Bulk push to DHIS2</p>
+      <p class="sub">Select dataset · Select org unit level · Upload Excel · Auto-match · Push to DHIS2</p>
     </div>
 
     <div class="card">
       <div class="card-inner">
 
-        <!-- TABS -->
+        <!-- STEP TABS -->
         <div class="tabs">
-          <div class="tab active" id="tab1" onclick="goTo(1)"><span class="tn">1</span>Configure</div>
-          <div class="tab" id="tab2" onclick="goTo(2)"><span class="tn">2</span>Upload Excel</div>
-          <div class="tab" id="tab3" onclick="goTo(3)"><span class="tn">3</span>Review</div>
-          <div class="tab" id="tab4" onclick="goTo(4)"><span class="tn">4</span>Push to DHIS2</div>
+          <div class="tab active" id="tab1" onclick="goStep(1)"><span class="tn">1</span>Configure</div>
+          <div class="tab" id="tab2" onclick="goStep(2)"><span class="tn">2</span>Upload Excel</div>
+          <div class="tab" id="tab3" onclick="goStep(3)"><span class="tn">3</span>Review</div>
+          <div class="tab" id="tab4" onclick="goStep(4)"><span class="tn">4</span>Push to DHIS2</div>
         </div>
 
-        <!-- ══ STEP 1: CONFIGURE ══ -->
+        <!-- ══════ STEP 1: CONFIGURE ══════ -->
         <div class="panel active" id="panel1">
-          <div class="sec-head"><span class="sec-icon">1</span><span class="sec-title">SELECT DATASET &amp; ORG UNIT LEVEL</span></div>
-
-          <div class="info blue">
-            Select the <strong>target DHIS2 dataset</strong> where data will be uploaded,
-            then select the <strong>org unit level</strong> your facilities are at and load them.
-            All matching will happen automatically from your Excel file.
+          <div class="sec-hdr">
+            <span class="sec-num">1</span>
+            <span class="sec-ttl">SELECT DATASET &amp; ORG UNIT LEVEL</span>
           </div>
 
-          <div style="margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <button class="btn btn-primary" id="loadMetaBtn" onclick="loadAllMeta()">🔄 Load Datasets &amp; Org Unit Levels</button>
+          <div class="info-box blue">
+            First load all datasets and org unit levels from your DHIS2.
+            Then select the <strong>target dataset</strong> and the <strong>org unit level</strong> where your data is collected.
+            Org unit names will be automatically matched from your Excel file.
+          </div>
+
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;">
+            <button class="btn btn-blue" id="loadMetaBtn" onclick="loadMeta()">🔄 Load Datasets &amp; Org Unit Levels</button>
             <span id="metaStatus" style="font-size:13px;color:#666;"></span>
           </div>
 
           <div class="cfg-grid">
             <div class="cfg-box">
               <label>Target Dataset</label>
-              <select id="dsSel" onchange="onDsChange()">
+              <select id="dsSel" onchange="onDatasetChange()">
                 <option value="">-- load metadata first --</option>
               </select>
-              <div class="hint" id="dsHint" style="display:none;"></div>
+              <div class="cfg-hint" id="dsHint" style="display:none;"></div>
             </div>
             <div class="cfg-box">
-              <label>Org Unit Level (where your data is collected)</label>
-              <select id="ouLvlSel" onchange="onLvlChange()">
+              <label>Org Unit Level</label>
+              <select id="lvlSel" onchange="onLevelChange()">
                 <option value="">-- load metadata first --</option>
               </select>
-              <div class="hint">Select the level that matches your facilities. Then click Load Org Units.</div>
+              <div class="cfg-hint">
+                Select the level where your health facilities or data collectors are.
+                Then click <strong>Load Org Units</strong> below.
+              </div>
             </div>
           </div>
 
-          <div id="ouLoadRow" style="display:none;margin-bottom:16px;display:none;">
-            <button class="btn btn-primary" id="loadOuBtn" onclick="loadOrgUnits()">📍 Load Org Units at Selected Level</button>
-            <span id="ouStatus" style="margin-left:12px;font-size:13px;color:#666;"></span>
+          <div id="ouLoadRow" style="display:none;margin-bottom:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <button class="btn btn-blue" id="ouBtn" onclick="loadOrgUnits()">📍 Load Org Units at Selected Level</button>
+            <span id="ouStatus" style="font-size:13px;color:#666;"></span>
           </div>
 
           <div class="btn-row">
-            <button class="btn btn-gold btn-lg" id="step1Next" onclick="goTo(2)" disabled>Next: Upload Excel →</button>
+            <button class="btn btn-gold btn-lg" id="step1Next" onclick="goStep(2)" disabled>
+              Next: Upload Excel →
+            </button>
           </div>
         </div>
 
-        <!-- ══ STEP 2: UPLOAD EXCEL ══ -->
+        <!-- ══════ STEP 2: UPLOAD EXCEL ══════ -->
         <div class="panel" id="panel2">
-          <div class="sec-head"><span class="sec-icon">2</span><span class="sec-title">UPLOAD YOUR EXCEL FILE</span></div>
-
-          <div class="info blue">
-            <strong>Required Excel format — no manual mapping needed:</strong><br>
-            &nbsp;&nbsp;• <strong>Column A:</strong> Organisation Unit Name (must match DHIS2 names at the selected level)<br>
-            &nbsp;&nbsp;• <strong>Column B:</strong> Period in <strong>YYYYMM</strong> format &nbsp;(e.g. <code style="background:#ddd;padding:1px 5px;border-radius:3px;">202301</code> = January 2023)<br>
-            &nbsp;&nbsp;• <strong>Columns C onward:</strong> Data values — column <em>headers</em> must match dataset data element names
+          <div class="sec-hdr">
+            <span class="sec-num">2</span>
+            <span class="sec-ttl">UPLOAD YOUR EXCEL FILE</span>
           </div>
 
-          <div class="dz" id="dz">
-            <input type="file" id="fileIn" accept=".xlsx,.xls,.csv" onchange="handleFile(event)">
-            <div class="dz-icon">📊</div>
-            <div class="dz-title">Drop your Excel file here or click to browse</div>
+          <div class="info-box blue">
+            <strong>Your Excel file must follow this exact column order:</strong><br>
+            &nbsp;&nbsp;&nbsp;• <strong>Column A:</strong> Organisation Unit Name &nbsp;(must exactly match DHIS2 org unit names at the selected level)<br>
+            &nbsp;&nbsp;&nbsp;• <strong>Column B:</strong> Period in <strong>YYYYMM</strong> format &nbsp;&nbsp;e.g. <code style="background:#dde;padding:1px 6px;border-radius:3px;font-size:11px;">202301</code> = January 2023<br>
+            &nbsp;&nbsp;&nbsp;• <strong>Column C onward:</strong> Data values &nbsp;— column <em>headers</em> must match the dataset's data element names<br>
+            <br>
+            No column selection or mapping is needed — everything is matched automatically.
+          </div>
+
+          <div class="dz" id="dropZone">
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="handleFileInput(event)">
+            <div class="dz-ico">📊</div>
+            <div class="dz-ttl">Drop your Excel file here or click to browse</div>
             <div class="dz-sub">.xlsx &nbsp;·&nbsp; .xls &nbsp;·&nbsp; .csv</div>
-            <div id="fileBadge" style="display:none;">
+            <div id="fileBadge" style="display:none;justify-content:center;">
               <div class="file-badge">
-                <span id="fnLabel"></span>
+                <span id="fileNameSpan"></span>
                 <button class="rm-btn" onclick="clearFile(event)">×</button>
               </div>
             </div>
           </div>
 
-          <div id="sheetRow" style="display:none;margin-top:14px;">
-            <div class="form-row" style="max-width:500px;">
-              <div class="form-group">
-                <label class="form-label">Sheet</label>
-                <select class="form-input" id="sheetSel" onchange="reloadSheet()"></select>
+          <div id="sheetControls" style="display:none;margin-top:16px;">
+            <div class="fr" style="max-width:480px;">
+              <div class="fg">
+                <label class="fl">Sheet</label>
+                <select class="fi" id="sheetSel" onchange="reloadSheet()"></select>
               </div>
-              <div class="form-group">
-                <label class="form-label">Header Row #</label>
-                <input type="number" class="form-input" id="hdrRow" value="1" min="1" max="20" onchange="reloadSheet()">
+              <div class="fg">
+                <label class="fl">Header Row #</label>
+                <input type="number" class="fi" id="hdrRowNum" value="1" min="1" max="30" onchange="reloadSheet()">
               </div>
             </div>
             <div id="fileInfo" style="font-size:13px;color:#666;margin:8px 0;"></div>
-            <div class="ptable-wrap" style="max-height:180px;">
-              <table class="ptable" id="rawTable"></table>
+            <div class="tbl-wrap" style="max-height:170px;">
+              <table class="tbl" id="rawPreviewTable"></table>
             </div>
           </div>
 
           <div class="btn-row">
-            <button class="btn btn-outline" onclick="goTo(1)">← Back</button>
-            <button class="btn btn-gold btn-lg" id="step2Next" onclick="runReview()" disabled>Next: Review →</button>
+            <button class="btn btn-outline" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-gold btn-lg" id="step2Next" onclick="runReview()" disabled>
+              Next: Review →
+            </button>
           </div>
         </div>
 
-        <!-- ══ STEP 3: REVIEW ══ -->
+        <!-- ══════ STEP 3: REVIEW ══════ -->
         <div class="panel" id="panel3">
-          <div class="sec-head"><span class="sec-icon">3</span><span class="sec-title">REVIEW &amp; VALIDATE</span></div>
+          <div class="sec-hdr">
+            <span class="sec-num">3</span>
+            <span class="sec-ttl">REVIEW &amp; VALIDATE</span>
+          </div>
 
           <div class="stats" id="reviewStats"></div>
-          <div id="reviewMsg"></div>
+          <div id="reviewMessage"></div>
 
-          <div style="margin:16px 0;">
-            <div style="font-weight:700;color:#004080;font-size:13px;margin-bottom:8px;border-bottom:2px solid #004080;padding-bottom:6px;">
-              Excel Column Headers → DHIS2 Data Elements
+          <!-- Column matching -->
+          <div style="margin:18px 0 10px;">
+            <div style="font-weight:700;color:#004080;font-size:13px;border-bottom:2px solid #004080;padding-bottom:6px;margin-bottom:8px;">
+              Excel Column Headers → DHIS2 Data Elements (auto-matched)
             </div>
-            <div class="ptable-wrap" style="max-height:200px;">
-              <table class="mtable" id="colMatchTable">
-                <thead><tr><th>Excel Column Header</th><th>Matched DHIS2 Data Element</th><th>Status</th></tr></thead>
-                <tbody id="colMatchBody"></tbody>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Excel Column Header</th><th>Matched DHIS2 Data Element</th><th>Status</th></tr>
+                </thead>
+                <tbody id="colMatchTbody"></tbody>
               </table>
             </div>
           </div>
 
-          <div style="margin:16px 0;">
-            <div style="font-weight:700;color:#004080;font-size:13px;margin-bottom:8px;border-bottom:2px solid #004080;padding-bottom:6px;">
-              Org Unit Names → DHIS2 UIDs (first 30 shown)
+          <!-- Org unit matching -->
+          <div style="margin:18px 0 10px;">
+            <div style="font-weight:700;color:#004080;font-size:13px;border-bottom:2px solid #004080;padding-bottom:6px;margin-bottom:8px;">
+              Excel Org Unit Names → DHIS2 UIDs (first 30 shown)
             </div>
-            <div class="ptable-wrap" style="max-height:200px;">
-              <table class="mtable" id="ouMatchTable">
-                <thead><tr><th>Excel Org Unit Name</th><th>Matched DHIS2 Name</th><th>Status</th></tr></thead>
-                <tbody id="ouMatchBody"></tbody>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Excel Name (Column A)</th><th>Matched DHIS2 Org Unit</th><th>Status</th></tr>
+                </thead>
+                <tbody id="ouMatchTbody"></tbody>
               </table>
             </div>
           </div>
 
-          <div style="font-weight:700;color:#28a745;font-size:13px;margin-bottom:8px;border-bottom:2px solid #28a745;padding-bottom:6px;">
-            Data Preview (first 15 rows to be uploaded)
-          </div>
-          <div class="ptable-wrap">
-            <table class="ptable" id="prevTable"></table>
+          <!-- Data preview -->
+          <div style="margin:18px 0 10px;">
+            <div style="font-weight:700;color:#28a745;font-size:13px;border-bottom:2px solid #28a745;padding-bottom:6px;margin-bottom:8px;">
+              Data Preview — first 15 rows that will be uploaded
+            </div>
+            <div class="tbl-wrap">
+              <table class="tbl" id="previewTable"></table>
+            </div>
           </div>
 
           <div class="btn-row">
-            <button class="btn btn-outline" onclick="goTo(2)">← Back</button>
-            <button class="btn btn-gold btn-lg" id="step3Next" onclick="goTo(4)" disabled>Next: Push to DHIS2 →</button>
+            <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-gold btn-lg" id="step3Next" onclick="goStep(4)" disabled>
+              Next: Push to DHIS2 →
+            </button>
           </div>
         </div>
 
-        <!-- ══ STEP 4: PUSH ══ -->
+        <!-- ══════ STEP 4: PUSH ══════ -->
         <div class="panel" id="panel4">
-          <div class="sec-head"><span class="sec-icon">4</span><span class="sec-title">PUSH DATA TO DHIS2</span></div>
+          <div class="sec-hdr">
+            <span class="sec-num">4</span>
+            <span class="sec-ttl">PUSH DATA TO DHIS2</span>
+          </div>
 
-          <div class="form-row" style="max-width:650px;margin-bottom:16px;">
-            <div class="form-group">
-              <label class="form-label">Import Strategy</label>
-              <select class="form-input" id="stratSel">
+          <div class="fr" style="max-width:650px;margin-bottom:16px;">
+            <div class="fg">
+              <label class="fl">Import Strategy</label>
+              <select class="fi" id="stratSel">
                 <option value="CREATE_AND_UPDATE">CREATE_AND_UPDATE (Recommended)</option>
-                <option value="CREATE">CREATE only (new data)</option>
-                <option value="UPDATE">UPDATE only (existing data)</option>
+                <option value="CREATE">CREATE only (new data only)</option>
+                <option value="UPDATE">UPDATE only (existing data only)</option>
               </select>
             </div>
-            <div class="form-group">
-              <label class="form-label">Batch Size (rows per request)</label>
-              <select class="form-input" id="batchSel">
+            <div class="fg">
+              <label class="fl">Batch Size (rows per request)</label>
+              <select class="fi" id="batchSel">
                 <option value="100">100 rows</option>
                 <option value="250" selected>250 rows</option>
                 <option value="500">500 rows</option>
@@ -388,37 +418,39 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
             </div>
           </div>
 
-          <div class="tog">
-            <input type="checkbox" id="dryRun">
-            <label for="dryRun">🧪 Dry Run — validate without saving anything to DHIS2</label>
+          <div class="tog-row">
+            <input type="checkbox" id="dryRunChk">
+            <label for="dryRunChk">🧪 Dry Run — validate without saving anything to DHIS2</label>
           </div>
-          <div class="tog">
-            <input type="checkbox" id="skipAudit">
-            <label for="skipAudit">⚡ Skip Audit Log (faster, not recommended for production)</label>
+          <div class="tog-row">
+            <input type="checkbox" id="skipAuditChk">
+            <label for="skipAuditChk">⚡ Skip Audit Log (faster upload)</label>
           </div>
 
           <div class="stats" id="pushStats" style="margin-top:16px;"></div>
 
-          <div class="prog-sec" id="progSec">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <div class="prog-wrap" id="progressWrap">
+            <div class="prog-top">
               <strong style="color:#004080;font-size:13px;">Upload Progress</strong>
-              <span id="progLbl" style="font-size:12px;color:#666;"></span>
+              <span id="progLabel" style="font-size:12px;color:#666;"></span>
             </div>
-            <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%">0%</div></div>
+            <div class="prog-bar">
+              <div class="prog-fill" id="progFill" style="width:0%">0%</div>
+            </div>
             <div class="log-box" id="logBox"></div>
           </div>
 
           <div id="pushResult" style="display:none;margin-top:14px;"></div>
 
           <div class="btn-row" style="justify-content:center;">
-            <button class="btn btn-outline" onclick="goTo(3)">← Back</button>
-            <button class="btn btn-green btn-lg" id="pushBtn" onclick="startPush()">🚀 UPLOAD TO DHIS2</button>
-            <button class="btn btn-red" onclick="resetAll()">Reset All</button>
+            <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
+            <button class="btn btn-green btn-lg" id="pushBtn" onclick="doPush()">🚀 UPLOAD TO DHIS2</button>
+            <button class="btn btn-outline-red" onclick="resetAll()">Reset All</button>
           </div>
         </div>
 
-      </div>
-    </div>
+      </div><!-- /card-inner -->
+    </div><!-- /card -->
 
     <div class="footer">
       <p style="font-weight:700;">Informatics Consultancy Firm-Sierra Leone (ICF-SL)</p>
@@ -426,599 +458,708 @@ body{background:#f0f4f8;font-family:'Oswald',sans-serif;color:#000;font-weight:5
       <p style="font-size:10px;">© 2025 ICF-SL. All rights reserved.</p>
     </div>
 
-  </div>
-</div>
+  </div><!-- /wrap -->
+</div><!-- /main -->
 
-<div class="notif" id="notif"></div>
+<div class="notif" id="notifDiv"></div>
 
 <script>
-// ╔══════════════════════════════════════════════════════════════╗
-// ║  PROXY URL — replace with your Google Apps Script URL       ║
-// ║  Deploy Code.gs as a Web App, then paste the URL below      ║
-// ╚══════════════════════════════════════════════════════════════╝
+// ╔═══════════════════════════════════════════════════════════╗
+// ║  PROXY URL — after deploying Code.gs as a GAS Web App,   ║
+// ║  paste your deployment URL here and save this file.      ║
+// ╚═══════════════════════════════════════════════════════════╝
 const PROXY_URL = 'PASTE_YOUR_GAS_WEB_APP_URL_HERE';
 
-// ──────────────────────────────────────────────────────────────
-// AUTH STATE
-// ──────────────────────────────────────────────────────────────
-let DHIS2_URL = '';
-let AUTH      = '';
+// ─── Runtime state ───────────────────────────────────────────
+let DHIS2_BASE = '';
+let AUTH_HEADER = '';
 
-// ──────────────────────────────────────────────────────────────
-// PROXY HELPERS
-// ──────────────────────────────────────────────────────────────
+let allDatasets   = [];
+let allLevels     = [];
+let allOrgUnits   = [];   // at the selected level
+let defaultCocId  = '';
+let selectedDS    = null;
+let selectedLevel = null;
 
-// GET — passes target URL and auth as query params to the GAS proxy
-async function gasGet(dhis2Path) {
-  const target = DHIS2_URL + dhis2Path;
-  const url    = PROXY_URL + '?url=' + encodeURIComponent(target) + '&auth=' + encodeURIComponent(AUTH);
-  const res    = await fetch(url);
-  const text   = await res.text();
-  if (!text || text.trim() === '') throw new Error('Empty response from proxy');
-  if (text.trim().startsWith('<')) throw new Error('Proxy returned an HTML page — check your GAS URL and that the web app is deployed correctly.');
-  let json;
-  try { json = JSON.parse(text); } catch(e) { throw new Error('Proxy returned invalid JSON: ' + text.substring(0, 200)); }
-  if (json.status === 'error') throw new Error(json.message || 'Unknown proxy error');
-  if (json.status === 'dhis2_error') throw new Error('DHIS2 error ' + json.httpStatus + ': ' + JSON.stringify(json.dhis2Response).substring(0, 200));
+let workbook     = null;
+let excelHeaders = [];
+let excelRows    = [];
+
+let columnMappings = [];  // [{colIndex, header, deId, deName, matched}]
+let orgUnitMap     = {};  // excel name → {id, displayName} | null
+let uploadPayload  = [];  // [{dataElement, period, orgUnit, categoryOptionCombo, value}]
+
+// ─── Proxy helpers ─────────────────────────────────────────────
+
+async function proxyGet(dhis2Path) {
+  const targetURL = DHIS2_BASE + dhis2Path;
+  const requestURL = PROXY_URL
+    + '?url='  + encodeURIComponent(targetURL)
+    + '&auth=' + encodeURIComponent(AUTH_HEADER);
+
+  const response = await fetch(requestURL);
+  const text = await response.text();
+
+  if (!text || text.trim() === '') {
+    throw new Error('Empty response from proxy (GET ' + dhis2Path + ')');
+  }
+  if (text.trim()[0] === '<') {
+    throw new Error('Proxy returned HTML instead of JSON. Check your GAS URL and deployment settings.');
+  }
+
+  const json = JSON.parse(text);
+
+  if (json.error) {
+    throw new Error(json.message || json.dhis2Message || 'Proxy GET error');
+  }
   return json;
 }
 
-// POST — sends target URL, auth, and payload in JSON body to GAS proxy
-async function gasPost(dhis2Path, payloadObj) {
-  const target = DHIS2_URL + dhis2Path;
-  const res    = await fetch(PROXY_URL, {
-    method: 'POST',
+async function proxyPost(dhis2Path, bodyObject) {
+  const targetURL = DHIS2_BASE + dhis2Path;
+
+  const response = await fetch(PROXY_URL, {
+    method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url: target, auth: AUTH, payload: payloadObj })
+    body:    JSON.stringify({
+      url:     targetURL,
+      auth:    AUTH_HEADER,
+      payload: bodyObject
+    })
   });
-  const text = await res.text();
-  if (!text || text.trim() === '') throw new Error('Empty response from proxy on POST');
-  if (text.trim().startsWith('<')) throw new Error('Proxy POST returned an HTML page — check GAS deployment has doPost() enabled.');
-  let json;
-  try { json = JSON.parse(text); } catch(e) { throw new Error('Proxy POST returned invalid JSON: ' + text.substring(0, 200)); }
-  if (json.status === 'error') throw new Error(json.message || 'Proxy POST error');
+
+  const text = await response.text();
+
+  if (!text || text.trim() === '') {
+    throw new Error('Empty response from proxy (POST ' + dhis2Path + ')');
+  }
+  if (text.trim()[0] === '<') {
+    throw new Error('Proxy POST returned HTML. Ensure Code.gs has doPost() and is deployed correctly.');
+  }
+
+  const json = JSON.parse(text);
+
+  if (json.error) {
+    throw new Error(json.message || 'Proxy POST error');
+  }
   return json;
 }
 
-// ──────────────────────────────────────────────────────────────
-// NOTIFICATION / LOG / PROGRESS
-// ──────────────────────────────────────────────────────────────
-function notify(msg, type) {
-  const n = document.getElementById('notif');
-  n.textContent = msg; n.className = 'notif ' + (type || 'info');
-  clearTimeout(n._t); n._t = setTimeout(() => n.className = 'notif', 5500);
-}
-function log(msg, type) {
-  const b = document.getElementById('logBox');
-  const d = document.createElement('div');
-  d.className = 'le ' + (type || 'info');
-  d.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
-  b.appendChild(d); b.scrollTop = b.scrollHeight;
-}
-function clearLog() { document.getElementById('logBox').innerHTML = ''; }
-function setProg(pct) {
-  const f = document.getElementById('progFill');
-  f.style.width = pct + '%'; f.textContent = pct + '%';
-  document.getElementById('progLbl').textContent = pct + '% complete';
-}
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function H(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function norm(s) { return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+// ─── Notification ──────────────────────────────────────────────
 
-// ──────────────────────────────────────────────────────────────
-// LOGIN
-// ──────────────────────────────────────────────────────────────
+function notify(message, type) {
+  const el = document.getElementById('notifDiv');
+  el.textContent = message;
+  el.className = 'notif ' + (type || 'info');
+  clearTimeout(el._timer);
+  el._timer = setTimeout(function() { el.className = 'notif'; }, 5500);
+}
+
+// ─── Log / Progress ────────────────────────────────────────────
+
+function addLog(message, type) {
+  const box  = document.getElementById('logBox');
+  const line = document.createElement('div');
+  line.className = 'log-line ' + (type || 'info');
+  line.textContent = '[' + new Date().toLocaleTimeString() + ']  ' + message;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+}
+
+function clearLog() { document.getElementById('logBox').innerHTML = ''; }
+
+function setProgress(pct) {
+  const fill = document.getElementById('progFill');
+  fill.style.width = pct + '%';
+  fill.textContent = pct + '%';
+  document.getElementById('progLabel').textContent = pct + '% complete';
+}
+
+function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+// ─── Utilities ─────────────────────────────────────────────────
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function normalise(str) {
+  return String(str || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function parsePeriodYYYYMM(rawValue) {
+  var v = String(rawValue || '').trim();
+  // Already YYYYMM  e.g.  202301
+  if (/^\d{6}$/.test(v)) return v;
+  // YYYY-MM  e.g.  2023-01
+  var m = v.match(/^(\d{4})-(\d{2})$/);
+  if (m) return m[1] + m[2];
+  // Yearly  e.g.  2023
+  if (/^\d{4}$/.test(v)) return v;
+  // Quarterly  e.g.  2023Q1
+  if (/^\d{4}Q[1-4]$/i.test(v)) return v.toUpperCase();
+  return null;
+}
+
+// ─── Step navigation ───────────────────────────────────────────
+
+function goStep(n) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel' + n).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(tab, i) {
+    tab.classList.remove('active', 'done');
+    if (i + 1 === n)      tab.classList.add('active');
+    else if (i + 1 < n)   tab.classList.add('done');
+  });
+}
+
+// ─── LOGIN ─────────────────────────────────────────────────────
+
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  if (PROXY_URL === 'https://script.google.com/macros/s/AKfycbzcaSDJTj1s0QDSMc3If4cn1tCay14HSmSh7QAy04i6hIfDORX8sednWEEj_O_DIhgG/exec' || !PROXY_URL) {
-    alert('ERROR: You must set your Google Apps Script URL in the PROXY_URL constant inside this HTML file before using the tool.\n\nOpen the HTML file in a text editor, find:\nconst PROXY_URL = \'PASTE_YOUR_GAS_WEB_APP_URL_HERE\';\nand replace with your actual GAS URL.');
+
+  if (!PROXY_URL || PROXY_URL === 'PASTE_YOUR_GAS_WEB_APP_URL_HERE') {
+    alert(
+      'ERROR: The PROXY_URL is not set.\n\n' +
+      'Open this HTML file in a text editor.\n' +
+      'Find the line near the top of the <script>:\n\n' +
+      '  const PROXY_URL = \'PASTE_YOUR_GAS_WEB_APP_URL_HERE\';\n\n' +
+      'Replace it with your Google Apps Script Web App URL, then save the file and reload.'
+    );
     return;
   }
 
-  DHIS2_URL = document.getElementById('instanceUrl').value.trim().replace(/\/+$/, '');
-  const user = document.getElementById('username').value.trim();
-  const pass = document.getElementById('password').value;
-  AUTH = 'Basic ' + btoa(user + ':' + pass);
+  DHIS2_BASE  = document.getElementById('instanceUrl').value.trim().replace(/\/+$/, '');
+  var user    = document.getElementById('username').value.trim();
+  var pass    = document.getElementById('password').value;
+  AUTH_HEADER = 'Basic ' + btoa(user + ':' + pass);
 
-  const btn = document.getElementById('connectBtn');
+  var btn = document.getElementById('loginBtn');
   btn.disabled = true; btn.textContent = 'Connecting...';
 
   try {
-    const me = await gasGet('/api/me');
+    var me = await proxyGet('/api/me');
     document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('mainContent').classList.add('active');
+    document.getElementById('mainDiv').classList.add('active');
     notify('Connected! Welcome ' + (me.firstName || '') + ' ' + (me.surname || ''), 'success');
-  } catch(err) {
+  } catch (err) {
     notify('Connection failed: ' + err.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = '🔗 Connect to DHIS2';
   }
 });
 
-// ──────────────────────────────────────────────────────────────
-// STEP NAVIGATION
-// ──────────────────────────────────────────────────────────────
-function goTo(n) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel' + n).classList.add('active');
-  document.querySelectorAll('.tab').forEach(function(t, i) {
-    t.classList.remove('active', 'done');
-    if (i + 1 === n) t.classList.add('active');
-    else if (i + 1 < n) t.classList.add('done');
-  });
-}
+// ─── STEP 1: LOAD METADATA ─────────────────────────────────────
 
-// ──────────────────────────────────────────────────────────────
-// STEP 1 — LOAD METADATA
-// ──────────────────────────────────────────────────────────────
-let allDatasets     = [];
-let allOuLevels     = [];
-let orgUnitsAtLevel = [];
-let defaultCocId    = '';
-let selDataset      = null;
-let selLevel        = null;
-
-async function loadAllMeta() {
-  const btn = document.getElementById('loadMetaBtn');
-  const st  = document.getElementById('metaStatus');
+async function loadMeta() {
+  var btn = document.getElementById('loadMetaBtn');
+  var msg = document.getElementById('metaStatus');
   btn.disabled = true; btn.textContent = '⏳ Loading...';
-  st.textContent = '';
+  msg.textContent = '';
+
   try {
     notify('Loading DHIS2 metadata...', 'info');
 
-    // Load datasets, org unit levels, and category option combos in parallel
-    const results = await Promise.all([
-      gasGet('/api/dataSets.json?fields=id,displayName,name,periodType,dataSetElements[dataElement[id,displayName,name]]&paging=false'),
-      gasGet('/api/organisationUnitLevels.json?fields=id,level,displayName&paging=false&order=level:asc'),
-      gasGet('/api/categoryOptionCombos.json?fields=id,displayName,name&paging=false')
+    var results = await Promise.all([
+      proxyGet('/api/dataSets.json?fields=id,displayName,name,periodType,dataSetElements[dataElement[id,displayName,name]]&paging=false'),
+      proxyGet('/api/organisationUnitLevels.json?fields=id,level,displayName&paging=false&order=level:asc'),
+      proxyGet('/api/categoryOptionCombos.json?fields=id,displayName,name&paging=false')
     ]);
 
     allDatasets = results[0].dataSets || [];
-    allOuLevels = results[1].organisationUnitLevels || [];
-    const cocs  = results[2].categoryOptionCombos || [];
+    allLevels   = results[1].organisationUnitLevels || [];
+    var cocs    = results[2].categoryOptionCombos || [];
 
-    // Find the default category option combo
-    const defCoc = cocs.find(function(c) { return /default/i.test(c.displayName || c.name); }) || cocs[0];
+    var defCoc  = cocs.find(function(c) { return /default/i.test(c.displayName || c.name); }) || cocs[0];
     defaultCocId = defCoc ? defCoc.id : '';
 
-    // Fill dataset selector
-    const dsSel = document.getElementById('dsSel');
+    // Fill datasets dropdown
+    var dsSel = document.getElementById('dsSel');
     dsSel.innerHTML = '<option value="">-- Select a dataset --</option>' +
       allDatasets.map(function(ds) {
-        return '<option value="' + ds.id + '">' + H(ds.displayName || ds.name) + '</option>';
+        return '<option value="' + ds.id + '">' + esc(ds.displayName || ds.name) + '</option>';
       }).join('');
 
-    // Fill org unit level selector
-    const lvlSel = document.getElementById('ouLvlSel');
+    // Fill org unit levels dropdown
+    var lvlSel = document.getElementById('lvlSel');
     lvlSel.innerHTML = '<option value="">-- Select a level --</option>' +
-      allOuLevels.map(function(l) {
-        return '<option value="' + l.level + '">' + H(l.displayName) + ' (Level ' + l.level + ')</option>';
+      allLevels.map(function(l) {
+        return '<option value="' + l.level + '">' + esc(l.displayName) + ' (Level ' + l.level + ')</option>';
       }).join('');
 
-    st.innerHTML = '<span style="color:#28a745;font-weight:700;">✓ ' + allDatasets.length + ' datasets · ' + allOuLevels.length + ' levels · ' + cocs.length + ' category combos loaded</span>';
+    msg.innerHTML = '<span style="color:#28a745;font-weight:700;">' +
+      '✓ ' + allDatasets.length + ' datasets &nbsp;·&nbsp; ' +
+      allLevels.length + ' org unit levels &nbsp;·&nbsp; ' +
+      cocs.length + ' category option combos loaded</span>';
+
     notify('Metadata loaded successfully', 'success');
 
-  } catch(err) {
-    st.innerHTML = '<span style="color:#dc3545;">✗ ' + H(err.message) + '</span>';
+  } catch (err) {
+    msg.innerHTML = '<span style="color:#dc3545;">✗ ' + esc(err.message) + '</span>';
     notify('Failed to load metadata: ' + err.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = '🔄 Load Datasets & Org Unit Levels';
   }
 }
 
-function onDsChange() {
-  const id = document.getElementById('dsSel').value;
-  selDataset = id ? allDatasets.find(function(d) { return d.id === id; }) : null;
-  const hint = document.getElementById('dsHint');
-  if (selDataset) {
-    const des = (selDataset.dataSetElements || []).map(function(e) { return e.dataElement; });
+function onDatasetChange() {
+  var id = document.getElementById('dsSel').value;
+  selectedDS = id ? allDatasets.find(function(d) { return d.id === id; }) : null;
+
+  var hint = document.getElementById('dsHint');
+  if (selectedDS) {
+    var deList = (selectedDS.dataSetElements || []).map(function(e) { return e.dataElement; });
     hint.style.display = 'block';
-    hint.textContent = des.length + ' data elements · Period type: ' + (selDataset.periodType || 'N/A');
+    hint.innerHTML =
+      '<strong>' + deList.length + ' data elements</strong> · Period type: ' + (selectedDS.periodType || 'N/A') +
+      '<br>Sample: ' + deList.slice(0, 3).map(function(d) { return esc(d.displayName || d.name); }).join(', ') +
+      (deList.length > 3 ? ' ...' : '');
   } else {
     hint.style.display = 'none';
   }
-  checkStep1();
+  checkStep1Ready();
 }
 
-function onLvlChange() {
-  const v = document.getElementById('ouLvlSel').value;
-  selLevel = v ? allOuLevels.find(function(l) { return l.level == parseInt(v); }) : null;
-  const row = document.getElementById('ouLoadRow');
-  row.style.display = selLevel ? 'block' : 'none';
-  orgUnitsAtLevel = [];
+function onLevelChange() {
+  var v = document.getElementById('lvlSel').value;
+  selectedLevel = v ? allLevels.find(function(l) { return l.level == parseInt(v); }) : null;
+
+  var row = document.getElementById('ouLoadRow');
+  row.style.display = selectedLevel ? 'flex' : 'none';
+  allOrgUnits = [];
   document.getElementById('ouStatus').textContent = '';
-  checkStep1();
+  checkStep1Ready();
 }
 
 async function loadOrgUnits() {
-  if (!selLevel) return;
-  const btn = document.getElementById('loadOuBtn');
-  const st  = document.getElementById('ouStatus');
+  if (!selectedLevel) return;
+
+  var btn = document.getElementById('ouBtn');
+  var msg = document.getElementById('ouStatus');
   btn.disabled = true; btn.textContent = '⏳ Loading org units...';
+
   try {
-    const data = await gasGet('/api/organisationUnits.json?fields=id,displayName,name&level=' + selLevel.level + '&paging=false');
-    orgUnitsAtLevel = data.organisationUnits || [];
-    st.innerHTML = '<span style="color:#28a745;font-weight:700;">✓ ' + orgUnitsAtLevel.length + ' org units loaded at Level ' + selLevel.level + '</span>';
-    notify('Loaded ' + orgUnitsAtLevel.length + ' org units', 'success');
-    checkStep1();
-  } catch(err) {
-    st.innerHTML = '<span style="color:#dc3545;">✗ ' + H(err.message) + '</span>';
-    notify('Failed: ' + err.message, 'error');
+    var data = await proxyGet(
+      '/api/organisationUnits.json?fields=id,displayName,name&level=' +
+      selectedLevel.level + '&paging=false'
+    );
+    allOrgUnits = data.organisationUnits || [];
+
+    msg.innerHTML = '<span style="color:#28a745;font-weight:700;">' +
+      '✓ ' + allOrgUnits.length + ' org units loaded at Level ' + selectedLevel.level + '</span>';
+    notify('Loaded ' + allOrgUnits.length + ' org units', 'success');
+    checkStep1Ready();
+
+  } catch (err) {
+    msg.innerHTML = '<span style="color:#dc3545;">✗ ' + esc(err.message) + '</span>';
+    notify('Failed to load org units: ' + err.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = '📍 Load Org Units at Selected Level';
   }
 }
 
-function checkStep1() {
-  document.getElementById('step1Next').disabled = !(selDataset && selLevel && orgUnitsAtLevel.length > 0);
+function checkStep1Ready() {
+  var ready = selectedDS && selectedLevel && allOrgUnits.length > 0;
+  document.getElementById('step1Next').disabled = !ready;
 }
 
-// ──────────────────────────────────────────────────────────────
-// STEP 2 — FILE HANDLING
-// ──────────────────────────────────────────────────────────────
-let wb           = null;
-let excelHeaders = [];
-let excelRows    = [];
+// ─── STEP 2: FILE HANDLING ──────────────────────────────────────
 
-const dzEl = document.getElementById('dz');
-dzEl.addEventListener('dragover', function(e) { e.preventDefault(); dzEl.classList.add('over'); });
-dzEl.addEventListener('dragleave', function() { dzEl.classList.remove('over'); });
-dzEl.addEventListener('drop', function(e) {
+var dzEl = document.getElementById('dropZone');
+dzEl.addEventListener('dragover',  function(e) { e.preventDefault(); dzEl.classList.add('over'); });
+dzEl.addEventListener('dragleave', function()  { dzEl.classList.remove('over'); });
+dzEl.addEventListener('drop',      function(e) {
   e.preventDefault(); dzEl.classList.remove('over');
-  if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
+  if (e.dataTransfer.files[0]) readExcelFile(e.dataTransfer.files[0]);
 });
 
-function handleFile(e) { if (e.target.files[0]) processFile(e.target.files[0]); }
+function handleFileInput(e) {
+  if (e.target.files[0]) readExcelFile(e.target.files[0]);
+}
 
 function clearFile(e) {
   e.stopPropagation();
-  wb = null; excelHeaders = []; excelRows = [];
+  workbook = null; excelHeaders = []; excelRows = [];
   document.getElementById('fileBadge').style.display = 'none';
-  document.getElementById('sheetRow').style.display = 'none';
-  document.getElementById('fileIn').value = '';
+  document.getElementById('sheetControls').style.display = 'none';
+  document.getElementById('fileInput').value = '';
   document.getElementById('step2Next').disabled = true;
 }
 
-function processFile(file) {
-  const reader = new FileReader();
+function readExcelFile(file) {
+  var reader = new FileReader();
   reader.onload = function(ev) {
     try {
-      wb = XLSX.read(new Uint8Array(ev.target.result), { type: 'array', cellDates: false, raw: false });
-      document.getElementById('fnLabel').textContent = file.name + '  (' + (file.size/1024).toFixed(1) + ' KB)';
+      workbook = XLSX.read(new Uint8Array(ev.target.result), { type: 'array', cellDates: false, raw: false });
+      document.getElementById('fileNameSpan').textContent = file.name + '  (' + (file.size / 1024).toFixed(1) + ' KB)';
       document.getElementById('fileBadge').style.display = 'flex';
-      const sel = document.getElementById('sheetSel');
-      sel.innerHTML = wb.SheetNames.map(function(s, i) { return '<option value="' + i + '">' + H(s) + '</option>'; }).join('');
-      document.getElementById('sheetRow').style.display = 'block';
+
+      var sheetSel = document.getElementById('sheetSel');
+      sheetSel.innerHTML = workbook.SheetNames.map(function(name, i) {
+        return '<option value="' + i + '">' + esc(name) + '</option>';
+      }).join('');
+
+      document.getElementById('sheetControls').style.display = 'block';
       reloadSheet();
       notify('File loaded: ' + file.name, 'success');
-    } catch(err) { notify('Read error: ' + err.message, 'error'); }
+    } catch (err) {
+      notify('Could not read file: ' + err.message, 'error');
+    }
   };
   reader.readAsArrayBuffer(file);
 }
 
 function reloadSheet() {
-  if (!wb) return;
-  const idx   = parseInt(document.getElementById('sheetSel').value) || 0;
-  const hRow  = Math.max(1, parseInt(document.getElementById('hdrRow').value) || 1);
-  const sheet = wb.Sheets[wb.SheetNames[idx]];
-  const raw   = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '', raw: false });
+  if (!workbook) return;
 
-  if (raw.length < hRow) { notify('File has too few rows', 'error'); return; }
-  excelHeaders = (raw[hRow - 1] || []).map(function(h) { return String(h).trim(); });
-  excelRows    = raw.slice(hRow).filter(function(r) { return r.some(function(c) { return c !== '' && c !== null && c !== undefined; }); });
+  var sheetIndex = parseInt(document.getElementById('sheetSel').value) || 0;
+  var headerRow  = Math.max(1, parseInt(document.getElementById('hdrRowNum').value) || 1);
+  var sheet      = workbook.Sheets[workbook.SheetNames[sheetIndex]];
+  var rawData    = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '', raw: false });
 
-  document.getElementById('fileInfo').textContent = excelRows.length + ' data rows · ' + excelHeaders.length + ' columns';
-  renderRaw();
-  document.getElementById('step2Next').disabled = excelRows.length === 0 || excelHeaders.length < 3;
+  if (rawData.length < headerRow) {
+    notify('The file has fewer rows than the specified header row number', 'error');
+    return;
+  }
+
+  excelHeaders = (rawData[headerRow - 1] || []).map(function(h) { return String(h).trim(); });
+  excelRows    = rawData.slice(headerRow).filter(function(row) {
+    return row.some(function(cell) { return cell !== '' && cell !== null && cell !== undefined; });
+  });
+
+  document.getElementById('fileInfo').textContent =
+    excelRows.length + ' data rows  ·  ' + excelHeaders.length + ' columns';
+
+  renderRawPreview();
+  document.getElementById('step2Next').disabled = (excelRows.length === 0 || excelHeaders.length < 3);
 }
 
-function renderRaw() {
-  let h = '<thead><tr><th>#</th>' + excelHeaders.map(function(c) { return '<th>' + H(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
-  excelRows.slice(0, 5).forEach(function(r, i) {
-    h += '<tr><td style="color:#aaa;font-size:11px;">' + (i+1) + '</td>' +
+function renderRawPreview() {
+  var html = '<thead><tr><th>#</th>' +
+    excelHeaders.map(function(h) { return '<th>' + esc(h) + '</th>'; }).join('') +
+    '</tr></thead><tbody>';
+
+  excelRows.slice(0, 5).forEach(function(row, i) {
+    html += '<tr><td style="color:#aaa;font-size:11px;">' + (i + 1) + '</td>' +
       excelHeaders.map(function(_, ci) {
-        const v = (r[ci] !== undefined && r[ci] !== null) ? String(r[ci]) : '';
-        return '<td class="' + (v ? 'cv' : 'ce') + '">' + (H(v) || '–') + '</td>';
+        var v = (row[ci] !== null && row[ci] !== undefined) ? String(row[ci]) : '';
+        return '<td class="' + (v ? 'val-ok' : 'val-empty') + '">' + (esc(v) || '–') + '</td>';
       }).join('') + '</tr>';
   });
-  h += '</tbody>';
-  document.getElementById('rawTable').innerHTML = h;
+
+  html += '</tbody>';
+  document.getElementById('rawPreviewTable').innerHTML = html;
 }
 
-// ──────────────────────────────────────────────────────────────
-// STEP 3 — REVIEW: AUTO-MATCH COLUMNS & ORG UNITS
-// ──────────────────────────────────────────────────────────────
-let colMap  = [];   // [{colIdx, header, deId, deName, matched}]
-let ouMap   = {};   // excelName -> DHIS2 ou object | null
-let payload = [];   // final [{dataElement,period,orgUnit,categoryOptionCombo,value}]
+// ─── STEP 3: REVIEW ────────────────────────────────────────────
 
-function findDeMatch(header, des) {
-  const h = norm(header);
-  // 1. Exact normalised match
-  let m = des.find(function(de) { return norm(de.displayName || de.name) === h; });
-  if (m) return m;
-  // 2. Header is contained in DE name or vice versa
-  m = des.find(function(de) {
-    const n = norm(de.displayName || de.name);
+function findDataElement(headerText, dataElements) {
+  var h = normalise(headerText);
+
+  // 1. Exact match
+  var match = dataElements.find(function(de) {
+    return normalise(de.displayName || de.name) === h;
+  });
+  if (match) return match;
+
+  // 2. One contains the other
+  match = dataElements.find(function(de) {
+    var n = normalise(de.displayName || de.name);
     return n.includes(h) || h.includes(n);
   });
-  return m || null;
-}
-
-function parsePeriod(val) {
-  val = String(val || '').trim();
-  // YYYYMM  e.g. 202301
-  if (/^\d{6}$/.test(val)) return val;
-  // YYYY-MM  e.g. 2023-01
-  const m1 = val.match(/^(\d{4})-(\d{2})$/);
-  if (m1) return m1[1] + m1[2];
-  // Yearly  e.g. 2023
-  if (/^\d{4}$/.test(val)) return val;
-  // Quarterly  e.g. 2023Q1
-  if (/^\d{4}Q[1-4]$/i.test(val)) return val.toUpperCase();
-  return null;
+  return match || null;
 }
 
 function runReview() {
-  if (!selDataset || !orgUnitsAtLevel.length || !excelRows.length) {
-    notify('Complete steps 1 and 2 first', 'error'); return;
+  if (!selectedDS || !allOrgUnits.length || !excelRows.length) {
+    notify('Please complete steps 1 and 2 first', 'error');
+    return;
   }
 
-  const des = (selDataset.dataSetElements || []).map(function(e) { return e.dataElement; });
+  var dataElements = (selectedDS.dataSetElements || []).map(function(e) { return e.dataElement; });
 
-  // ─ Match column headers (cols 2 onwards) to data elements ─
-  colMap = [];
-  for (let i = 2; i < excelHeaders.length; i++) {
-    const h     = excelHeaders[i];
-    const match = findDeMatch(h, des);
-    colMap.push({
-      colIdx: i,
-      header: h,
-      deId:   match ? match.id : null,
-      deName: match ? (match.displayName || match.name) : null,
-      matched: !!match
+  // ── A. Match column headers (C onwards) to data elements ──
+  columnMappings = [];
+  for (var i = 2; i < excelHeaders.length; i++) {
+    var header = excelHeaders[i];
+    var de     = findDataElement(header, dataElements);
+    columnMappings.push({
+      colIndex: i,
+      header:   header,
+      deId:     de ? de.id   : null,
+      deName:   de ? (de.displayName || de.name) : null,
+      matched:  !!de
     });
   }
 
-  // ─ Build org unit lookup (normalised name → DHIS2 object) ─
-  const ouLookup = {};
-  orgUnitsAtLevel.forEach(function(ou) {
-    ouLookup[norm(ou.displayName || ou.name)] = ou;
+  // ── B. Build org unit lookup from the loaded list ──
+  var ouLookupByName = {};
+  allOrgUnits.forEach(function(ou) {
+    ouLookupByName[normalise(ou.displayName || ou.name)] = ou;
   });
 
-  // ─ Match every unique org unit name in column A ─
-  const uniqueNames = [];
-  const seen = {};
-  excelRows.forEach(function(r) {
-    const v = String(r[0] || '').trim();
-    if (v && !seen[v]) { seen[v] = true; uniqueNames.push(v); }
-  });
-  ouMap = {};
-  uniqueNames.forEach(function(name) {
-    ouMap[name] = ouLookup[norm(name)] || null;
+  // Unique names from column A
+  var seen = {};
+  orgUnitMap = {};
+  excelRows.forEach(function(row) {
+    var name = String(row[0] || '').trim();
+    if (name && !seen[name]) {
+      seen[name] = true;
+      orgUnitMap[name] = ouLookupByName[normalise(name)] || null;
+    }
   });
 
-  // ─ Build upload payload ─
-  payload = [];
-  const matchedCols = colMap.filter(function(c) { return c.matched; });
-  let skippedRows = 0;
+  // ── C. Build upload payload ──
+  uploadPayload = [];
+  var matchedColumns = columnMappings.filter(function(c) { return c.matched; });
+  var skippedRowCount = 0;
 
   excelRows.forEach(function(row) {
-    const ouName = String(row[0] || '').trim();
-    const perRaw = String(row[1] || '').trim();
-    const ouObj  = ouMap[ouName];
-    const period = parsePeriod(perRaw);
+    var ouName = String(row[0] || '').trim();
+    var perRaw = String(row[1] || '').trim();
+    var ouObj  = orgUnitMap[ouName];
+    var period = parsePeriodYYYYMM(perRaw);
 
-    if (!ouObj || !period) { skippedRows++; return; }
+    if (!ouObj || !period) { skippedRowCount++; return; }
 
-    matchedCols.forEach(function(mc) {
-      const v = row[mc.colIdx];
+    matchedColumns.forEach(function(mc) {
+      var v = row[mc.colIndex];
       if (v === '' || v === null || v === undefined) return;
-      payload.push({
-        dataElement: mc.deId,
-        period: period,
-        orgUnit: ouObj.id,
+      uploadPayload.push({
+        dataElement:        mc.deId,
+        period:             period,
+        orgUnit:            ouObj.id,
         categoryOptionCombo: defaultCocId,
-        value: String(v)
+        value:              String(v)
       });
     });
   });
 
-  // ─ Render column match table ─
-  document.getElementById('colMatchBody').innerHTML = colMap.length === 0
-    ? '<tr><td colspan="3" style="color:#999;padding:12px;text-align:center;">No data element columns found — need at least 3 columns (Org Unit, Period, Data)</td></tr>'
-    : colMap.map(function(c) {
-        return '<tr><td><strong>' + H(c.header) + '</strong></td>' +
-          '<td>' + (c.matched ? H(c.deName) : '<em style="color:#aaa;">—</em>') + '</td>' +
-          '<td><span class="badge ' + (c.matched ? 'ok' : 'skip') + '">' + (c.matched ? 'MATCHED ✓' : 'SKIPPED') + '</span></td></tr>';
-      }).join('');
+  // ── D. Render column match table ──
+  var colHtml;
+  if (columnMappings.length === 0) {
+    colHtml = '<tr><td colspan="3" style="color:#999;padding:14px;text-align:center;">No data element columns found. Need at least 3 columns: Org Unit, Period, Data.</td></tr>';
+  } else {
+    colHtml = columnMappings.map(function(c) {
+      return '<tr>' +
+        '<td><strong>' + esc(c.header) + '</strong></td>' +
+        '<td>' + (c.matched ? esc(c.deName) : '<em style="color:#aaa;">No match found</em>') + '</td>' +
+        '<td><span class="badge ' + (c.matched ? 'ok' : 'skip') + '">' + (c.matched ? 'MATCHED ✓' : 'SKIPPED') + '</span></td>' +
+        '</tr>';
+    }).join('');
+  }
+  document.getElementById('colMatchTbody').innerHTML = colHtml;
 
-  // ─ Render org unit match table ─
-  const ouEntries = Object.entries(ouMap).slice(0, 30);
-  document.getElementById('ouMatchBody').innerHTML = ouEntries.length === 0
-    ? '<tr><td colspan="3" style="color:#999;padding:12px;text-align:center;">No org unit names found in column A</td></tr>'
-    : ouEntries.map(function(pair) {
-        const name  = pair[0];
-        const match = pair[1];
-        return '<tr><td>' + H(name) + '</td>' +
-          '<td>' + (match ? H(match.displayName) : '<em style="color:#aaa;">—</em>') + '</td>' +
-          '<td><span class="badge ' + (match ? 'ok' : 'warn') + '">' + (match ? 'MATCHED ✓' : 'NOT FOUND') + '</span></td></tr>';
-      }).join('');
+  // ── E. Render org unit match table ──
+  var ouEntries = Object.entries(orgUnitMap).slice(0, 30);
+  var ouHtml;
+  if (ouEntries.length === 0) {
+    ouHtml = '<tr><td colspan="3" style="color:#999;padding:14px;text-align:center;">No org unit names found in column A</td></tr>';
+  } else {
+    ouHtml = ouEntries.map(function(pair) {
+      var name  = pair[0];
+      var match = pair[1];
+      return '<tr>' +
+        '<td>' + esc(name) + '</td>' +
+        '<td>' + (match ? esc(match.displayName) : '<em style="color:#aaa;">—</em>') + '</td>' +
+        '<td><span class="badge ' + (match ? 'ok' : 'warn') + '">' + (match ? 'MATCHED ✓' : 'NOT FOUND') + '</span></td>' +
+        '</tr>';
+    }).join('');
+  }
+  document.getElementById('ouMatchTbody').innerHTML = ouHtml;
 
-  // ─ Stats ─
-  const matchedDe  = colMap.filter(function(c) { return c.matched; }).length;
-  const skippedDe  = colMap.filter(function(c) { return !c.matched; }).length;
-  const matchedOu  = Object.values(ouMap).filter(Boolean).length;
-  const unmatchedOu= Object.values(ouMap).filter(function(v) { return !v; }).length;
-  const periods    = [...new Set(payload.map(function(v) { return v.period; }))];
+  // ── F. Stats ──
+  var matchedDE   = columnMappings.filter(function(c) { return c.matched; }).length;
+  var skippedDE   = columnMappings.filter(function(c) { return !c.matched; }).length;
+  var matchedOU   = Object.values(orgUnitMap).filter(Boolean).length;
+  var unmatchedOU = Object.values(orgUnitMap).filter(function(v) { return !v; }).length;
+  var periodList  = Array.from(new Set(uploadPayload.map(function(v) { return v.period; })));
 
   document.getElementById('reviewStats').innerHTML =
-    '<div class="stat blue"><div class="stat-n">' + payload.length + '</div><div class="stat-l">Values Ready</div></div>' +
-    '<div class="stat ' + (matchedDe > 0 ? 'green' : 'red') + '"><div class="stat-n">' + matchedDe + '</div><div class="stat-l">DE Cols Matched</div></div>' +
-    '<div class="stat ' + (skippedDe > 0 ? 'gold' : 'green') + '"><div class="stat-n">' + skippedDe + '</div><div class="stat-l">DE Cols Skipped</div></div>' +
-    '<div class="stat ' + (matchedOu > 0 ? 'green' : 'red') + '"><div class="stat-n">' + matchedOu + '</div><div class="stat-l">Org Units Matched</div></div>' +
-    '<div class="stat ' + (unmatchedOu > 0 ? 'red' : 'green') + '"><div class="stat-n">' + unmatchedOu + '</div><div class="stat-l">Org Units Not Found</div></div>' +
-    '<div class="stat"><div class="stat-n">' + periods.length + '</div><div class="stat-l">Periods</div></div>' +
-    '<div class="stat ' + (skippedRows > 0 ? 'gold' : '') + '"><div class="stat-n">' + skippedRows + '</div><div class="stat-l">Rows Skipped</div></div>';
+    '<div class="stat blue"><div class="stat-n">' + uploadPayload.length + '</div><div class="stat-l">Values Ready</div></div>' +
+    '<div class="stat ' + (matchedDE > 0 ? 'green' : 'red') + '"><div class="stat-n">' + matchedDE + '</div><div class="stat-l">DE Cols Matched</div></div>' +
+    '<div class="stat ' + (skippedDE > 0 ? 'gold' : 'green') + '"><div class="stat-n">' + skippedDE + '</div><div class="stat-l">DE Cols Skipped</div></div>' +
+    '<div class="stat ' + (matchedOU > 0 ? 'green' : 'red') + '"><div class="stat-n">' + matchedOU + '</div><div class="stat-l">OUs Matched</div></div>' +
+    '<div class="stat ' + (unmatchedOU > 0 ? 'red' : 'green') + '"><div class="stat-n">' + unmatchedOU + '</div><div class="stat-l">OUs Not Found</div></div>' +
+    '<div class="stat"><div class="stat-n">' + periodList.length + '</div><div class="stat-l">Periods</div></div>' +
+    '<div class="stat ' + (skippedRowCount > 0 ? 'gold' : '') + '"><div class="stat-n">' + skippedRowCount + '</div><div class="stat-l">Rows Skipped</div></div>';
 
-  // ─ Message ─
-  const msgEl = document.getElementById('reviewMsg');
-  if (payload.length === 0) {
-    msgEl.innerHTML = '<div class="info red"><strong>⛔ No uploadable values found.</strong> Check: (1) Org unit names match DHIS2, (2) Column headers match data element names, (3) Period is in YYYYMM format.</div>';
-  } else if (unmatchedOu > 0 || skippedDe > 0) {
-    msgEl.innerHTML = '<div class="info yellow"><strong>⚠ Partial match.</strong> ' + unmatchedOu + ' org unit(s) not found, ' + skippedDe + ' column(s) skipped. Only matched rows will be uploaded.</div>';
+  // ── G. Message ──
+  var msgEl = document.getElementById('reviewMessage');
+  if (uploadPayload.length === 0) {
+    msgEl.innerHTML = '<div class="info-box red"><strong>⛔ No uploadable values found.</strong> ' +
+      'Check: (1) Column A has org unit names that exist in DHIS2 at the selected level. ' +
+      '(2) Column B has periods in YYYYMM format (e.g. 202301). ' +
+      '(3) Column headers from Column C match your dataset\'s data element names.</div>';
+  } else if (unmatchedOU > 0 || skippedDE > 0) {
+    msgEl.innerHTML = '<div class="info-box yellow"><strong>⚠ Partial match.</strong> ' +
+      unmatchedOU + ' org unit(s) not found in DHIS2 and ' +
+      skippedDE + ' column(s) did not match any data element. Those rows/columns will not be uploaded.</div>';
   } else {
-    msgEl.innerHTML = '<div class="info green"><strong>✅ All org units and data element columns matched.</strong> ' + payload.length + ' values are ready to upload.</div>';
+    msgEl.innerHTML = '<div class="info-box green"><strong>✅ Everything matched perfectly.</strong> ' +
+      uploadPayload.length + ' values are ready to upload to DHIS2.</div>';
   }
 
-  // ─ Preview table ─
-  const deCols = colMap.filter(function(c) { return c.matched; });
-  let ph = '<thead><tr><th>#</th><th>Org Unit (DHIS2)</th><th>Period</th>' +
-    deCols.map(function(c) { return '<th>' + H(c.deName) + '</th>'; }).join('') +
+  // ── H. Preview table ──
+  var deCols = columnMappings.filter(function(c) { return c.matched; });
+  var previewHtml = '<thead><tr><th>#</th><th>Org Unit</th><th>Period</th>' +
+    deCols.map(function(c) { return '<th>' + esc(c.deName) + '</th>'; }).join('') +
     '</tr></thead><tbody>';
-  excelRows.slice(0, 15).forEach(function(row, i) {
-    const ouName = String(row[0] || '').trim();
-    const perRaw = String(row[1] || '').trim();
-    const ouObj  = ouMap[ouName];
-    const period = parsePeriod(perRaw);
-    ph += '<tr><td style="color:#aaa;font-size:11px;">' + (i+1) + '</td>' +
-      '<td class="' + (ouObj ? 'cv' : 'ce') + '">' + H(ouObj ? ouObj.displayName : '✗ ' + ouName) + '</td>' +
-      '<td class="' + (period ? 'cv' : 'ce') + '">' + (period || H(perRaw)) + '</td>' +
-      deCols.map(function(mc) {
-        const v = row[mc.colIdx];
-        const s = (v !== '' && v !== null && v !== undefined) ? H(String(v)) : '';
-        return '<td class="' + (s ? 'cv' : 'ce') + '">' + (s || '–') + '</td>';
-      }).join('') + '</tr>';
-  });
-  ph += '</tbody>';
-  document.getElementById('prevTable').innerHTML = ph;
 
-  document.getElementById('step3Next').disabled = payload.length === 0;
-  goTo(3);
-  notify(payload.length > 0 ? 'Review ready: ' + payload.length + ' values' : 'No matching values — check your data', payload.length > 0 ? 'success' : 'error');
+  excelRows.slice(0, 15).forEach(function(row, i) {
+    var ouName = String(row[0] || '').trim();
+    var perRaw = String(row[1] || '').trim();
+    var ouObj  = orgUnitMap[ouName];
+    var period = parsePeriodYYYYMM(perRaw);
+
+    previewHtml += '<tr>' +
+      '<td style="color:#aaa;font-size:11px;">' + (i + 1) + '</td>' +
+      '<td class="' + (ouObj ? 'val-ok' : 'val-empty') + '">' +
+        (ouObj ? esc(ouObj.displayName) : '✗ ' + esc(ouName)) +
+      '</td>' +
+      '<td class="' + (period ? 'val-ok' : 'val-empty') + '">' + (period || esc(perRaw)) + '</td>' +
+      deCols.map(function(mc) {
+        var v = row[mc.colIndex];
+        var s = (v !== '' && v !== null && v !== undefined) ? esc(String(v)) : '';
+        return '<td class="' + (s ? 'val-ok' : 'val-empty') + '">' + (s || '–') + '</td>';
+      }).join('') +
+      '</tr>';
+  });
+  previewHtml += '</tbody>';
+  document.getElementById('previewTable').innerHTML = previewHtml;
+
+  document.getElementById('step3Next').disabled = uploadPayload.length === 0;
+  goStep(3);
+  notify(
+    uploadPayload.length > 0 ? 'Review complete: ' + uploadPayload.length + ' values ready' : 'No matching values found — check your data',
+    uploadPayload.length > 0 ? 'success' : 'error'
+  );
 }
 
-// ──────────────────────────────────────────────────────────────
-// STEP 4 — PUSH TO DHIS2
-// ──────────────────────────────────────────────────────────────
-async function startPush() {
-  if (!payload.length) { notify('Nothing to upload', 'error'); return; }
+// ─── STEP 4: PUSH ──────────────────────────────────────────────
 
-  const btn = document.getElementById('pushBtn');
+async function doPush() {
+  if (!uploadPayload.length) { notify('Nothing to upload', 'error'); return; }
+
+  var btn = document.getElementById('pushBtn');
   btn.disabled = true; btn.textContent = '⏳ Uploading...';
-  document.getElementById('progSec').classList.add('active');
+  document.getElementById('progressWrap').classList.add('active');
   document.getElementById('pushResult').style.display = 'none';
-  clearLog(); setProg(0);
+  clearLog(); setProgress(0);
 
-  const strategy  = document.getElementById('stratSel').value;
-  const batchSize = parseInt(document.getElementById('batchSel').value);
-  const dryRun    = document.getElementById('dryRun').checked;
-  const skipAudit = document.getElementById('skipAudit').checked;
+  var strategy  = document.getElementById('stratSel').value;
+  var batchSize = parseInt(document.getElementById('batchSel').value);
+  var dryRun    = document.getElementById('dryRunChk').checked;
+  var skipAudit = document.getElementById('skipAuditChk').checked;
 
   // Split into batches
-  const batches = [];
-  for (let i = 0; i < payload.length; i += batchSize)
-    batches.push(payload.slice(i, i + batchSize));
+  var batches = [];
+  for (var i = 0; i < uploadPayload.length; i += batchSize) {
+    batches.push(uploadPayload.slice(i, i + batchSize));
+  }
 
-  let imported = 0, updated = 0, ignored = 0, errors = 0;
+  var imported = 0, updated = 0, ignored = 0, batchErrors = 0;
 
-  log('══════════════════════════════════════', 'info');
-  log('DHIS2 BULK UPLOAD STARTING', 'info');
-  log('Dataset  : ' + (selDataset.displayName || selDataset.name), 'info');
-  log('Strategy : ' + strategy + (dryRun ? ' [DRY RUN — no data will be saved]' : ''), 'info');
-  log('Values   : ' + payload.length + ' in ' + batches.length + ' batch(es) of ' + batchSize, 'info');
-  log('══════════════════════════════════════', 'info');
+  addLog('══════════════════════════════════════', 'info');
+  addLog('DHIS2 BULK UPLOAD STARTING', 'info');
+  addLog('Dataset  : ' + (selectedDS.displayName || selectedDS.name), 'info');
+  addLog('Strategy : ' + strategy + (dryRun ? '  [DRY RUN — nothing will be saved]' : ''), 'info');
+  addLog('Values   : ' + uploadPayload.length + '  in  ' + batches.length + ' batch(es) of ' + batchSize, 'info');
+  addLog('══════════════════════════════════════', 'info');
 
   document.getElementById('pushStats').innerHTML =
-    '<div class="stat blue"><div class="stat-n">' + payload.length + '</div><div class="stat-l">Total Values</div></div>' +
+    '<div class="stat blue"><div class="stat-n">' + uploadPayload.length + '</div><div class="stat-l">Total Values</div></div>' +
     '<div class="stat"><div class="stat-n">' + batches.length + '</div><div class="stat-l">Batches</div></div>' +
-    (dryRun ? '<div class="stat gold"><div class="stat-n">DRY</div><div class="stat-l">Dry Run</div></div>' : '');
+    (dryRun ? '<div class="stat gold"><div class="stat-n">DRY</div><div class="stat-l">Dry Run Mode</div></div>' : '');
 
-  for (let b = 0; b < batches.length; b++) {
-    const batch = batches[b];
-    const pct   = Math.round((b / batches.length) * 90);
-    setProg(pct);
-    log('Batch ' + (b+1) + '/' + batches.length + ': sending ' + batch.length + ' values...', 'info');
+  for (var b = 0; b < batches.length; b++) {
+    var batch = batches[b];
+    setProgress(Math.round((b / batches.length) * 90));
+    addLog('Batch ' + (b + 1) + ' / ' + batches.length + '  →  sending ' + batch.length + ' values...', 'info');
 
     try {
-      let qs = '/api/dataValueSets?importStrategy=' + strategy + '&dryRun=' + dryRun;
+      var qs = '/api/dataValueSets?importStrategy=' + strategy + '&dryRun=' + dryRun;
       if (skipAudit) qs += '&skipAudit=true';
 
-      const result = await gasPost(qs, { dataValues: batch });
+      var result = await proxyPost(qs, { dataValues: batch });
 
-      const ic  = result.importCount || (result.response && result.response.importCount) || {};
-      const imp = ic.imported || 0;
-      const upd = ic.updated  || 0;
-      const ign = ic.ignored  || 0;
+      var ic  = result.importCount || (result.response && result.response.importCount) || {};
+      var imp = ic.imported || 0;
+      var upd = ic.updated  || 0;
+      var ign = ic.ignored  || 0;
       imported += imp; updated += upd; ignored += ign;
 
-      log('Batch ' + (b+1) + ' → ✓ ' + imp + ' imported  ↑ ' + upd + ' updated  ✗ ' + ign + ' ignored', ign > 0 ? 'warning' : 'success');
+      addLog(
+        'Batch ' + (b + 1) + '  ✓ ' + imp + ' imported   ↑ ' + upd + ' updated   ✗ ' + ign + ' ignored',
+        ign > 0 ? 'warning' : 'success'
+      );
 
-      // Show any DHIS2 conflict messages
-      const conflicts = result.conflicts || (result.response && result.response.conflicts) || [];
+      // Show DHIS2 conflict details (first 3)
+      var conflicts = result.conflicts || (result.response && result.response.conflicts) || [];
       conflicts.slice(0, 3).forEach(function(c) {
-        log('  ↳ ' + (c.value || c.object || JSON.stringify(c)), 'warning');
+        addLog('    ↳ ' + (c.value || c.object || JSON.stringify(c)), 'warning');
       });
 
-    } catch(err) {
-      log('Batch ' + (b+1) + ' FAILED: ' + err.message, 'error');
-      errors += batch.length;
+    } catch (err) {
+      addLog('Batch ' + (b + 1) + ' FAILED: ' + err.message, 'error');
+      batchErrors += batch.length;
     }
 
     if (b < batches.length - 1) await sleep(250);
   }
 
-  setProg(100);
-  const ok = imported + updated > 0;
+  setProgress(100);
+  var success = imported + updated > 0;
 
-  log('══════════════════════════════════════', ok ? 'success' : 'warning');
-  log((dryRun ? 'DRY RUN ' : '') + 'COMPLETE', ok ? 'success' : 'warning');
-  log('Imported: ' + imported + '  Updated: ' + updated + '  Ignored: ' + ignored + '  Errors: ' + errors, ok ? 'success' : 'warning');
-  log('══════════════════════════════════════', ok ? 'success' : 'warning');
+  addLog('══════════════════════════════════════', success ? 'success' : 'warning');
+  addLog((dryRun ? 'DRY RUN ' : '') + 'UPLOAD COMPLETE', success ? 'success' : 'warning');
+  addLog('Imported: ' + imported + '   Updated: ' + updated + '   Ignored: ' + ignored + '   Batch errors: ' + batchErrors, success ? 'success' : 'warning');
+  addLog('══════════════════════════════════════', success ? 'success' : 'warning');
 
   document.getElementById('pushStats').innerHTML =
     '<div class="stat ' + (imported > 0 ? 'green' : '') + '"><div class="stat-n">' + imported + '</div><div class="stat-l">Imported</div></div>' +
     '<div class="stat ' + (updated  > 0 ? 'green' : '') + '"><div class="stat-n">' + updated  + '</div><div class="stat-l">Updated</div></div>' +
     '<div class="stat ' + (ignored  > 0 ? 'red'   : '') + '"><div class="stat-n">' + ignored  + '</div><div class="stat-l">Ignored</div></div>' +
-    '<div class="stat ' + (errors   > 0 ? 'red' : 'green') + '"><div class="stat-n">' + errors + '</div><div class="stat-l">Batch Errors</div></div>';
+    '<div class="stat ' + (batchErrors > 0 ? 'red' : 'green') + '"><div class="stat-n">' + batchErrors + '</div><div class="stat-l">Batch Errors</div></div>';
 
-  const resEl = document.getElementById('pushResult');
+  var resEl = document.getElementById('pushResult');
   resEl.style.display = 'block';
-  resEl.innerHTML = '<div class="info ' + (ok ? 'green' : 'yellow') + '">' +
-    '<strong>' + (dryRun ? '🧪 Dry Run Complete' : (ok ? '✅ Upload Successful!' : '⚠ Upload Finished with Issues')) + '</strong><br>' +
+  resEl.innerHTML = '<div class="info-box ' + (success ? 'green' : 'yellow') + '">' +
+    '<strong>' + (dryRun ? '🧪 Dry Run Complete' : (success ? '✅ Upload Successful!' : '⚠ Upload Finished with Issues')) + '</strong><br>' +
     imported + ' imported · ' + updated + ' updated' +
     (ignored > 0 ? ' · ' + ignored + ' ignored' : '') +
-    (errors  > 0 ? ' · ' + errors  + ' batch errors' : '') + '.' +
-    (dryRun ? ' No data was saved (dry run mode).' : '') + '</div>';
+    (batchErrors > 0 ? ' · ' + batchErrors + ' batch errors' : '') + '.' +
+    (dryRun ? ' No data was actually saved to DHIS2 (dry run mode).' : '') +
+    '</div>';
 
-  notify(ok ? 'Upload complete!' : 'Finished with issues — check log', ok ? 'success' : 'warning');
+  notify(success ? 'Upload complete!' : 'Finished with issues — see log', success ? 'success' : 'warning');
   btn.disabled = false; btn.textContent = '🚀 UPLOAD TO DHIS2';
 }
 
-// ──────────────────────────────────────────────────────────────
-// RESET
-// ──────────────────────────────────────────────────────────────
+// ─── RESET ─────────────────────────────────────────────────────
+
 function resetAll() {
-  wb = null; excelHeaders = []; excelRows = [];
-  colMap = []; ouMap = {}; payload = [];
-  selDataset = null; selLevel = null; orgUnitsAtLevel = [];
-  document.getElementById('fileIn').value = '';
+  workbook = null; excelHeaders = []; excelRows = [];
+  columnMappings = []; orgUnitMap = {}; uploadPayload = [];
+  selectedDS = null; selectedLevel = null; allOrgUnits = [];
+
+  document.getElementById('fileInput').value = '';
   document.getElementById('fileBadge').style.display = 'none';
-  document.getElementById('sheetRow').style.display = 'none';
+  document.getElementById('sheetControls').style.display = 'none';
   document.getElementById('step2Next').disabled = true;
   document.getElementById('step1Next').disabled = true;
   document.getElementById('dsSel').value = '';
-  document.getElementById('ouLvlSel').value = '';
+  document.getElementById('lvlSel').value = '';
   document.getElementById('ouLoadRow').style.display = 'none';
   document.getElementById('ouStatus').textContent = '';
   document.getElementById('dsHint').style.display = 'none';
-  document.getElementById('progSec').classList.remove('active');
+  document.getElementById('progressWrap').classList.remove('active');
   document.getElementById('pushResult').style.display = 'none';
   document.getElementById('pushStats').innerHTML = '';
   document.getElementById('reviewStats').innerHTML = '';
-  document.getElementById('reviewMsg').innerHTML = '';
-  goTo(1);
-  notify('All selections reset', 'info');
+  document.getElementById('reviewMessage').innerHTML = '';
+  goStep(1);
+  notify('All selections cleared — ready to start again', 'info');
 }
 </script>
 </body>
